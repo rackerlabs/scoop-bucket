@@ -1,0 +1,2 @@
+# Scoop is Windows-only: check out text files with CRLF, store them as LF.
+* text=auto eol=crlf

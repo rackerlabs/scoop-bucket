@@ -1,0 +1,41 @@
+name: Tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: ${{ matrix.shell }}
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shell: [powershell, pwsh]
+    steps:
+      - name: Checkout bucket
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          path: bucket_repo
+      - name: Checkout Scoop
+        uses: actions/checkout@v4
+        with:
+          repository: ScoopInstaller/Scoop
+          path: scoop_core
+      - name: Install test dependencies
+        shell: ${{ matrix.shell }}
+        run: |
+          Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+          Install-Module -Name BuildHelpers -MinimumVersion 2.0.1 -Scope CurrentUser -Force
+          Install-Module -Name Pester -MinimumVersion 5.2.0 -Scope CurrentUser -Force -SkipPublisherCheck
+      - name: Test bucket
+        shell: ${{ matrix.shell }}
+        run: ./bucket_repo/bin/test.ps1
+        env:
+          SCOOP_HOME: ${{ github.workspace }}\scoop_core
