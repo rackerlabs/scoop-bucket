@@ -1,0 +1,22 @@
+{
+    "version": "0.1.1",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/rackerlabs/understackctl/releases/download/v0.1.1/understackctl_0.1.1_windows_amd64.zip",
+            "bin": [
+                "understackctl.exe"
+            ],
+            "hash": "3b417d3c961371ae5494a558bca726b7c4a0869050b00c0851e05ace8e52d55e"
+        },
+        "arm64": {
+            "url": "https://github.com/rackerlabs/understackctl/releases/download/v0.1.1/understackctl_0.1.1_windows_arm64.zip",
+            "bin": [
+                "understackctl.exe"
+            ],
+            "hash": "d2f4eadbc06351684e7ce1d53868504b0968a476bcf41394e8e2d30e638d2e9c"
+        }
+    },
+    "homepage": "https://github.com/rackerlabs/understackctl",
+    "license": "Apache-2.0",
+    "description": "CLI tool for managing UnderStack deployments"
+}
